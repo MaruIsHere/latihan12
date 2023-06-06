@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membaca Data Json 03</title>
+</head>
+<body>
+   
+        <a href="latihan01-new.html">Data Baru</a>
+        <div id="Tampil"></div> 
+
+      
+
+ 
+
+    <script>
+       const jsHTTP = new XMLHttpRequest();
+       jsHTTP.open("GET","https://webpro.ptov.my.id/api/curduser.php?aksi=get");
+       jsHTTP.send();
+
+       jsHTTP.onload = function() {
+         const data = JSON.parse(this.responseText);
+  
+
+         let tx = "<h3> List Data </h3>";
+         tx += "<table><tr><th>#</th><th>Nama</th><th>Email</th><th>Username</th></tr>";
+        let no = 1;
+        for(let i = 0; i < data.isi.length; i++){
+            tx +="<tr>";
+                tx +="  <td>"+no+"</td>";
+                tx +="  <td>"+data.isi[i][0]+"</td>";
+                tx +="  <td>"+data.isi[i][1]+"</td>";
+                tx +="  <td>"+data.isi[i][2]+"</td>";
+                tx +=" <td><a href='latihan12-edit.html?id="+ data.isi[i][3]+"'>Edit</a>"
+                tx +=" <a href='latihan12-del.html?id="+ data.isi[i][3]+"'>Hapus</a></td>"
+            tx +="</tr>";
+            no++;
+        }
+         tx +="</table>";
+         document.getElementById("Tampil").innerHTML = tx;
+    
+      
+       };
+    </script>
+
+</body>
+</html>
